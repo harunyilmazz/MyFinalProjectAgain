@@ -21,7 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 //Autofac, Ninject, CastleWindsor, StructureMap, LightInject, DryInject --> IoC Container
 builder.Services.AddControllers();
 
-
+builder.Services.AddCors();
 
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -65,6 +65,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 
 app.UseHttpsRedirection();
 
